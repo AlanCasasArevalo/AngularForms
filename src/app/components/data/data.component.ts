@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-data',
@@ -7,7 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DataComponent implements OnInit {
 
-  constructor() { }
+  form: FormGroup;
+
+  constructor() {
+    this.form = new FormGroup({
+      'name': new FormControl('', [Validators.required, Validators.minLength(3)]),
+      'lastname': new FormControl('', Validators.required),
+      'email': new FormControl('', [Validators.required, Validators.email]),
+    });
+  }
+
+  saveData() {
+    console.log('El usuario es:');
+    console.log(this.form.value);
+
+    console.log('El formulario es:');
+    console.log(this.form);
+  }
 
   ngOnInit() {
   }
