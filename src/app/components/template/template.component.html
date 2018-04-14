@@ -4,33 +4,33 @@
 
     <div>
 
-        <div class="form-group row">
+        <div class="form-group row" [ngClass]=" {'has-danger': (name.errors?.minlength || name.errors?.required) && name.touched } ">
             <label class="col-2 col-form-label">Nombre</label>
             <div class="col-8">
 
                 <input class="form-control" type="text" placeholder="Nombre" name="name" [(ngModel)]="defaultUser.name" required minlength="3" #name="ngModel">
 
-                <div *ngIf="name.errors?.required">
+                <div class="form-control-feedback" *ngIf="name.errors?.required">
                     Este campo es requerido
                 </div>
 
-                <div *ngIf="name.errors?.minlength">
+                <div class="form-control-feedback"  *ngIf="name.errors?.minlength">
                     Este campo es necesita al menos {{ name.errors.minlength.requiredLength }} letras
                 </div>
 
             </div>
         </div>
 
-        <div class="form-group row">
+        <div class="form-group row" [ngClass]=" {'has-danger': (lastname.errors?.minlength || lastname.errors?.required) && lastname.touched } ">
             <label class="col-2 col-form-label">Apellido</label>
             <div class="col-8">
 
                 <input class="form-control" type="text" placeholder="Apellido" name="lastname" [(ngModel)]="defaultUser.lastname" required minlength="3" #lastname="ngModel">
-                <div *ngIf="lastname.errors?.required">
+                <div class="form-control-feedback" *ngIf="lastname.errors?.required">
                     Este campo es requerido
                 </div>
 
-                <div *ngIf="lastname.errors?.minlength">
+                <div class="form-control-feedback" *ngIf="lastname.errors?.minlength">
                     Este campo es necesita al menos {{ lastname.errors.minlength.requiredLength }} letras
                 </div>
 
@@ -39,17 +39,17 @@
 
     </div>
 
-    <div class="form-group row">
-        <label class="col-2 col-form-label">Correo</label>
+    <div class="form-group row" [ngClass]=" {'has-danger': (email.invalid || email.errors?.required) && email.touched } ">
+            <label class="col-2 col-form-label">Correo</label>
         <div class="col-md-8">
 
             <input class="form-control" type="email" placeholder="Correo electrónico" name="email" [(ngModel)]="defaultUser.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" #email="ngModel">
 
-            <div *ngIf="email.errors?.required">
+            <div class="form-control-feedback" *ngIf="email.errors?.required">
                 Este campo es requerido
             </div>
 
-            <div *ngIf="email.invalid">
+            <div class="form-control-feedback" *ngIf="email.invalid">
                 Correo no valido
             </div>
 
@@ -61,7 +61,7 @@
     <div class="form-group row">
         <label class="col-2 col-form-label">&nbsp;</label>
         <div class="input-group col-md-8">
-            <button type="submit" class="btn btn-outline-primary">
+            <button [disabled]="!form.valid" type="submit" class="btn btn-outline-primary">
         Guardar
       </button>
         </div>
