@@ -4,21 +4,25 @@ import { NgForm} from '@angular/forms';
 @Component({
   selector: 'app-template',
   templateUrl: './template.component.html',
-  styles: []
+  styles: [`
+    .ng-invalid.ng-touched:not(form) {
+      border: 1px solid red;
+    }
+  `]
 })
 export class TemplateComponent {
 
   defaultUser: Object = {
-    name : 'Alan',
-    lastname: 'Casas',
-    email: 'test@test.com'
+    name : null,
+    lastname: null,
+    email: null
   };
 
   constructor() { }
 
   saveData( form: NgForm ) {
     console.log('Valores');
-    console.log(form.value);
+    console.log(form);
 
     console.log('Default User');
     console.log( this.defaultUser );
