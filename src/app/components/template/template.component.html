@@ -14,7 +14,7 @@
                     Este campo es requerido
                 </div>
 
-                <div class="form-control-feedback"  *ngIf="name.errors?.minlength">
+                <div class="form-control-feedback" *ngIf="name.errors?.minlength">
                     Este campo es necesita al menos {{ name.errors.minlength.requiredLength }} letras
                 </div>
 
@@ -40,7 +40,7 @@
     </div>
 
     <div class="form-group row" [ngClass]=" {'has-danger': (email.invalid || email.errors?.required) && email.touched } ">
-            <label class="col-2 col-form-label">Correo</label>
+        <label class="col-2 col-form-label">Correo</label>
         <div class="col-md-8">
 
             <input class="form-control" type="email" placeholder="Correo electrónico" name="email" [(ngModel)]="defaultUser.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" #email="ngModel">
@@ -59,12 +59,58 @@
 
 
     <div class="form-group row">
+        <label class="col-2 col-form-label">Pais</label>
+        <div class="col-md-8">
+            <select [(ngModel)]="defaultUser.country" class="form-control" name="country">
+                <option value="">Seleccione un pais</option>
+                <option *ngFor="let country of countries" [value]="country.code"> {{ country.name }} </option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-2 col-form-label">Sexo</label>
+        <div class="col-md-8">
+            <label class="custom-control custom-radio">
+                <input 
+                [(ngModel)]="defaultUser.gender"
+                name="gender"
+                type="radio" 
+                value="Hombre"
+                class="custom-control-input"
+                >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Hombre</span>
+            </label>
+            <label class="custom-control custom-radio">
+                    <input 
+                    [(ngModel)]="defaultUser.gender"
+                    name="gender"
+                    type="radio" 
+                    value="Mujer"
+                    class="custom-control-input"
+                    >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Mujer</span>
+          </label>
+        </div>
+    </div>
+
+
+
+    <div class="form-group row">
         <label class="col-2 col-form-label">&nbsp;</label>
         <div class="input-group col-md-8">
-            <button [disabled]="!form.valid" type="submit" class="btn btn-outline-primary">
+            <button type="submit" class="btn btn-outline-primary">
+            <!-- <button [disabled]="!form.valid" type="submit" class="btn btn-outline-primary"> -->
         Guardar
       </button>
         </div>
     </div>
 
 </form>
+
+
+<pre>
+    {{ defaultUser | json }}
+</pre>
