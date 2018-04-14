@@ -17,8 +17,11 @@ export class TemplateComponent {
     lastname: null,
     email: null,
     country: '',
-    gender: 'Hombre'
+    gender: 'Hombre',
+    accept: false,
   };
+
+  gender = ['Hombre', 'Mujer'];
 
   countries = [{
       code: 'CRI',
