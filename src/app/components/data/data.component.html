@@ -32,6 +32,27 @@
     </div>
 
     <div class="form-group row">
+        <label class="col-2 col-form-label">Contraseña</label>
+        <div class="col-md-8">
+            <input class="form-control" type="password" placeholder="Password" formControlName="password">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-2 col-form-label">Confirmar contraseña</label>
+        <div class="col-md-8">
+            <input class="form-control" type="password" placeholder="Password" formControlName="confirmPassword">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-2 col-form-label">Nickname</label>
+        <div class="col-md-8">
+            <input class="form-control" type="text" placeholder="Nickname" formControlName="nickname">
+        </div>
+    </div>
+
+
+    <div class="form-group row">
         <label class="col-2 col-form-label">Hobbies</label>
         <div class="col-md-8" formArrayName="hobbies">
 
@@ -56,5 +77,7 @@
     </div>
 
     {{ form.valid }}
+    <br>
+    <br> {{ form.status }}
 
 </form>
