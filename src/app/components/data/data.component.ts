@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-data',
@@ -15,7 +15,8 @@ export class DataComponent implements OnInit {
       name: 'Alan',
       lastname: 'Casas'
     },
-    email: 'test@gmail.com'
+    email: 'test@gmail.com',
+    // hobbies : ['Escuchar musica', 'Cocinar', 'Leer', 'Comer']
   };
 
   constructor() {
@@ -27,12 +28,21 @@ export class DataComponent implements OnInit {
         'name': new FormControl('', [Validators.required, Validators.minLength(3)]),
         'lastname': new FormControl('', Validators.required)
       }),
-      'email': new FormControl('', [Validators.required, Validators.email])
+      'email': new FormControl('', [Validators.required, Validators.email]),
+      'hobbies': new FormArray([
+        new FormControl('Comer', Validators.required)
+      ])
     });
 
     // This just work IF and just IF your object properties and form properties are the same
-    this.form.setValue(this.user);
+    // this.form.setValue(this.user);
 
+  }
+
+  addNewHobbie() {
+    (<FormArray>this.form.controls['hobbies']).push(
+      new FormControl('Leer', Validators.required)
+    );
   }
 
   saveData() {
@@ -46,13 +56,14 @@ export class DataComponent implements OnInit {
     this.form.reset(this.user);
 
     // This reset the form but without any values
-    // this.form.reset({
-    //   'fullName' : {
-    //     'name': '',
-    //     'lastname': ''
-    //   },
-    //   'email': ''
-    // });
+    this.form.reset({
+      'fullName' : {
+        'name': 'Alan',
+        'lastname': 'Casas'
+      },
+      'email': 'test@gmail.com',
+      'hobbies' : ''
+    });
 
   }
 
