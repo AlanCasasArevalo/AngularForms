@@ -10,11 +10,25 @@ export class DataComponent implements OnInit {
 
   form: FormGroup;
 
+  user: Object = {
+    fullName : {
+      name: 'Alan',
+      lastname: 'Casas'
+    },
+    email: 'test@gmail.com'
+  };
+
   constructor() {
+
+    // console.log(this.user);
+
     this.form = new FormGroup({
-      'name': new FormControl('', [Validators.required, Validators.minLength(3)]),
-      'lastname': new FormControl('', Validators.required),
-      'email': new FormControl('', [Validators.required, Validators.email]),
+
+      'fullName' : new FormGroup({
+        'name': new FormControl('', [Validators.required, Validators.minLength(3)]),
+        'lastname': new FormControl('', Validators.required)
+      }),
+      'email': new FormControl('', [Validators.required, Validators.email])
     });
   }
 
