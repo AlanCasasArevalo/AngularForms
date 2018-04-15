@@ -23,13 +23,16 @@ export class DataComponent implements OnInit {
     // console.log(this.user);
 
     this.form = new FormGroup({
-
       'fullName' : new FormGroup({
         'name': new FormControl('', [Validators.required, Validators.minLength(3)]),
         'lastname': new FormControl('', Validators.required)
       }),
       'email': new FormControl('', [Validators.required, Validators.email])
     });
+
+    // This just work IF and just IF your object properties and form properties are the same
+    this.form.setValue(this.user);
+
   }
 
   saveData() {
@@ -38,6 +41,19 @@ export class DataComponent implements OnInit {
 
     console.log('El formulario es:');
     console.log(this.form);
+
+    // This reset the form but with user default values
+    this.form.reset(this.user);
+
+    // This reset the form but without any values
+    // this.form.reset({
+    //   'fullName' : {
+    //     'name': '',
+    //     'lastname': ''
+    //   },
+    //   'email': ''
+    // });
+
   }
 
   ngOnInit() {
